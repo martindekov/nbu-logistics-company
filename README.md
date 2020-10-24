@@ -25,3 +25,13 @@ For IntelliJ compile successfully Ctrl + Alt + S
 ### Styles
 
 The styles used in the project are from bootstrap's [Materia](https://bootswatch.com/materia/). 
+
+### Data Base
+
+For development purposes install [XAMPP](https://www.apachefriends.org/index.html) and start the mysql server.
+
+1. Create database preferably called `logistics_company` or any other
+2. Copy application.properties.example located in src/main/resources to application.properties
+3. Configure the application.properties to match the credentials to your mysql database and the database name
+
+
