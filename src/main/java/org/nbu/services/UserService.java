@@ -36,10 +36,10 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void createAdmin(User user) {
+    public void createOwner(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        Role userRole = new Role("ADMIN");
+        Role userRole = new Role("OWNER");
         List<Role> roles = new ArrayList<>();
         roles.add(userRole);
         user.setRoles(roles);

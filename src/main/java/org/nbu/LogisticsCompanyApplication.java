@@ -19,8 +19,8 @@ public class LogisticsCompanyApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         {
-            User newAdmin = new User("admin@mail.com", "Admin", "123456");
-            userService.createAdmin(newAdmin);
+            User newOwner = new User("admin@mail.com", "Admin", "123456");
+            userService.createOwner(newOwner);
         }
     }
 }

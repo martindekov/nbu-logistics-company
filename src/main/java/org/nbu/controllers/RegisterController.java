@@ -65,13 +65,13 @@ public class RegisterController {
         return "";
     }
 
-    @GetMapping("/registerCourier")
+    @GetMapping("/registerOffice")
     public String registerOfficeForm(@Valid User user, BindingResult bindingResult, Model model) {
         // TODO: implement only employee should register office and assign couriers to the office
         return "";
     }
 
-    @PostMapping("/registerCourier")
+    @PostMapping("/registerOffice")
     public String registerOffice(@Valid User user, BindingResult bindingResult, Model model) {
         // TODO: implement only employee should register office and assign couriers to the office
         return "";
