@@ -19,8 +19,18 @@ public class LogisticsCompanyApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         {
-            User newOwner = new User("admin@mail.com", "Admin", "123456");
+            // Default owner account this account will be the only account capable of listing all
+            // tasks (for delivery), clients and employees. This should not be deleted.
+            User newOwner = new User("owner@mail.com", "Owner", "123456");
             userService.createOwner(newOwner);
+
+            // TODO: Delete this account is created so we can do logic with tasks
+            User newCustomer = new User("customer@mail.com","Customer","123456");
+            userService.createCustomer(newCustomer);
+
+            // TODO: Delete this account is created so we can do logic with tasks
+            User newEmployee = new User("employee@mail.com","Employee","123456");
+            userService.createCustomer(newEmployee);
         }
     }
 }

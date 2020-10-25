@@ -27,8 +27,8 @@ public class RegisterController {
 
     /**
      * This is base the method which registers the user which can be employee or customer
-     * Where employee can register office and register couriers for the office
-     * Where customer can register tasks to be delivered in office from courier
+     * Where owner can register office
+     * Where customer can register tasks and assign them to office and employee
      */
     @PostMapping("/register")
     public String registerUser(@Valid User user, BindingResult bindingResult, Model model) {
@@ -53,27 +53,17 @@ public class RegisterController {
         return "views/success";
     }
 
-    @GetMapping("/registerCourier")
-    public String registerCourierForm(@Valid User user, BindingResult bindingResult, Model model) {
-        // TODO: implement only employee should register courier aka employ courier
-        return "";
-    }
-
-    @PostMapping("/registerCourier")
-    public String registerCourier(@Valid User user, BindingResult bindingResult, Model model) {
-        // TODO: implement only employee should register courier aka employ courier
-        return "";
-    }
-
     @GetMapping("/registerOffice")
     public String registerOfficeForm(@Valid User user, BindingResult bindingResult, Model model) {
-        // TODO: implement only employee should register office and assign couriers to the office
+        // TODO: implement to return registration view for office which should only
+        //  be accessible by the owner which can register office
         return "";
     }
 
     @PostMapping("/registerOffice")
     public String registerOffice(@Valid User user, BindingResult bindingResult, Model model) {
-        // TODO: implement only employee should register office and assign couriers to the office
+        // TODO: implement saving the office information from the form above
+        //  only owner should have access to this endpoint
         return "";
     }
 

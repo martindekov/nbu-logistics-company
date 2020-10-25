@@ -20,8 +20,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * All accounts are user type accounts. The difference between COURIER EMPLOYEE
- * and ADMIN is only in the role which can be specified by string for authorization purposes.
+ * All accounts are user type accounts. The difference between EMPLOYEE, CUSTOMER
+ * and OWNER is only in the role which can be specified by string for authorization purposes.
  */
 @Entity
 @Setter

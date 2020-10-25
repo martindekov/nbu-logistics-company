@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 /**
- * All user types are differentiated only by role. The role can be COURIER, EMPLOYEE and CUSTOMER
+ * All user types are differentiated only by role. The role can be CUSTOMER, EMPLOYEE and OWNER
  */
 @Entity
 @Setter

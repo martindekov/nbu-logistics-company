@@ -23,7 +23,7 @@ public class TaskController {
 
     @GetMapping("/addTask")
     public String taskForm(String email, Model model, HttpSession session) {
-        // TODO: extend so tasks are assigned to couriers from the customer which wants
+        // TODO: extend so tasks are assigned to employee from the customer which wants
         //  his order to be delivered
         session.setAttribute("email", email);
         model.addAttribute("task", new Task());
@@ -33,7 +33,7 @@ public class TaskController {
 
     @PostMapping("/addTask")
     public String addTask(@Valid Task task, BindingResult bindingResult, HttpSession session) {
-        // TODO: extend so tasks are assigned to couriers from the customer which wants
+        // TODO: extend so tasks are assigned to employee from the customer which wants
         //  his order to be delivered
         if (bindingResult.hasErrors()) {
             return "views/taskForm";
@@ -44,41 +44,41 @@ public class TaskController {
         return "redirect:/users";
     }
 
-    @GetMapping("/showCustomerTask")
+    @GetMapping("/customerTask")
     public String taskCustomerForm(String email, Model model, HttpSession session) {
         // TODO: implement with a form so the customer can request task for delivery
-        //  from a courier and office
+        //  from employee and office
         return "";
     }
 
-    @GetMapping("/showCustomerTasks")
-    public String showCustomerTasks(String email, Model model, HttpSession session) {
+    @GetMapping("/listCustomerTasks")
+    public String listCustomerTasks(String email, Model model, HttpSession session) {
         // TODO: implement so the customer can see all the requested deliveries
         return "";
     }
 
-    @PostMapping("/showCustomerTask")
+    @PostMapping("/customerTask")
     public String taskCustomer(String email, Model model, HttpSession session) {
         // TODO: implement with a form so the customer can request task for delivery
-        //  from a courier and office
+        //  from employee and office
         return "";
     }
 
-    @GetMapping("/showCourierTask")
-    public String taskCourierForm(String email, Model model, HttpSession session) {
-        // TODO: implement with a form so the courier can accept or decline a task
+    @GetMapping("/employeeTask")
+    public String taskEmployeeForm(String email, Model model, HttpSession session) {
+        // TODO: implement with a form so the employee can accept or decline a task
         //  for delivery from a customer
         return "";
     }
 
-    @GetMapping("/showCourierTasks")
-    public String showCourierTasks(String email, Model model, HttpSession session) {
-        // TODO: implement so the courier can list all requested tasks for deliveries from a customer
+    @GetMapping("/listEmployeeTasks")
+    public String listEmployeeTasks(String email, Model model, HttpSession session) {
+        // TODO: implement so the employee can list all requested tasks for deliveries
         return "";
     }
 
-    @PostMapping("/showCourierTask")
-    public String taskCourier(String email, Model model, HttpSession session) {
+    @PostMapping("/employeeTask")
+    public String taskEmployee(String email, Model model, HttpSession session) {
         // TODO: implement with a form so the courier can accept or decline a task
         //  for delivery from a customer
         return "";

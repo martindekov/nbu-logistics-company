@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 
 /**
- * This class represents a task for delivery between customer and courier.
+ * This class represents a task for delivery between customer and employee.
  */
 @Entity
 @Setter
