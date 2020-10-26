@@ -30,7 +30,7 @@ public class LogisticsCompanyApplication implements CommandLineRunner {
 
             // TODO: Delete this account is created so we can do logic with tasks
             User newEmployee = new User("employee@mail.com","Employee","123456");
-            userService.createCustomer(newEmployee);
+            userService.createEmployee(newEmployee);
         }
     }
 }

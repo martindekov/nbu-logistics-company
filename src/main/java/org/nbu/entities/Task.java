@@ -36,9 +36,15 @@ public class Task {
     @NotEmpty
     @Column(length = 1000)
     private String description;
+    @Column(length = 1000)
+    private String address;
     @ManyToOne
-    @JoinColumn(name = "USER_EMAIL")
-    private User user;
+    @JoinColumn(name = "EMPLOYEE_EMAIL", referencedColumnName="email")
+    private User employee;
+
+    @ManyToOne
+    @JoinColumn(name = "CUSTOMER_EMAIL", referencedColumnName="email")
+    private User customer;
 
     public Task(String date, String startTime, String stopTime, String description) {
         this.date = date;
