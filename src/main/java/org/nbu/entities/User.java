@@ -2,14 +2,7 @@ package org.nbu.entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -39,8 +32,11 @@ public class User {
     private String name;
     @Size(min = 4)
     private String password;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Task> tasks;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Task> tasksAsEmployee;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Task> tasksAsCustomer;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ROLES", joinColumns = {

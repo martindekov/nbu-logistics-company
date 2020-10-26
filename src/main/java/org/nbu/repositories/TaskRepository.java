@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    List<Task> findByUser(User user);
+    List<Task> findByEmployee(User user);
+
+    List<Task> findByCustomer(User user);
 
 }

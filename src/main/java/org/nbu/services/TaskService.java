@@ -14,14 +14,27 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public void addTask(Task task, User user) {
-        task.setUser(user);
+    public void addTask(Task task, User customer, User employee) {
+        task.setCustomer(customer);
+        task.setEmployee(employee);
         taskRepository.save(task);
     }
 
-    public List<Task> findUserTask(User user) {
+    public List<Task> findEmployeeTask(User user) {
 
-        return taskRepository.findByUser(user);
+        return taskRepository.findByEmployee(user);
     }
 
+    public List<Task> findCustomerTask(User user) {
+
+        return taskRepository.findByCustomer(user);
+    }
+
+    /**
+     * Owner can see all delivery tasks
+     */
+    public List<Task> findOwnerTask(User user) {
+
+        return taskRepository.findAll();
+    }
 }

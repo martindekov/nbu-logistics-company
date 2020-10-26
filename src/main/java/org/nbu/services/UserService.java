@@ -1,7 +1,6 @@
 package org.nbu.services;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.nbu.entities.Role;
 import org.nbu.entities.User;
@@ -65,6 +64,10 @@ public class UserService {
 
     public List<User> findByName(String name) {
         return userRepository.findByNameLike("%" + name + "%");
+    }
+
+    public List<User> findEmployees() {
+        return userRepository.findUserByRoles(new Role("Employee"));
     }
 
 }

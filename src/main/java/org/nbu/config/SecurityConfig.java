@@ -36,8 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // TODO: extend the matchers with the new endpoints
         http.authorizeRequests().antMatchers("/register", "/", "/about", "/login", "/css/**", "/webjars/**").permitAll()
-                .antMatchers("/profile").hasAnyRole("EMPLOYEE","CUSTOMER","OWNER")
-                .antMatchers("/users", "/addTask", "/offices", "/registerOffice").hasRole("OWNER")
+                .antMatchers("/profile", "/addTask").hasAnyRole("EMPLOYEE","CUSTOMER","OWNER")
+                .antMatchers("/users", "/offices", "/registerOffice").hasRole("OWNER")
                 .antMatchers("/registerOffice").hasAnyRole("OWNER")
                 .and().formLogin().loginPage("/login").permitAll()
                 .defaultSuccessUrl("/profile").and().logout().logoutSuccessUrl("/login");

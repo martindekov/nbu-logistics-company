@@ -4,14 +4,20 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.nbu.entities.Task;
+import org.nbu.entities.User;
 import org.nbu.services.TaskService;
 import org.nbu.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class TaskController {
@@ -26,20 +32,26 @@ public class TaskController {
         // TODO: extend so tasks are assigned to employee from the customer which wants
         //  his order to be delivered
         session.setAttribute("email", email);
+        List<User> employees = userService.findEmployees();
         model.addAttribute("task", new Task());
+        model.addAttribute("employees", employees);
         return "views/taskForm";
 
     }
 
     @PostMapping("/addTask")
     public String addTask(@Valid Task task, BindingResult bindingResult, HttpSession session) {
-        // TODO: extend so tasks are assigned to employee from the customer which wants
-        //  his order to be delivered
         if (bindingResult.hasErrors()) {
             return "views/taskForm";
         }
-        String email = (String) session.getAttribute("email");
-        taskService.addTask(task, userService.findOne(email));
+
+        SecurityContextImpl token = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        org.springframework.security.core.userdetails.User loggedUser =
+                (org.springframework.security.core.userdetails.User)token.getAuthentication().getPrincipal();
+        String loggedUserEmail = loggedUser.getUsername();
+        User customer = userService.findOne(loggedUserEmail);
+        User employee = userService.findOne(task.getEmployee().getEmail());
+        taskService.addTask(task, customer, employee);
 
         return "redirect:/users";
     }
