@@ -1,61 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{fragments/main_layout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
 <head>
-<title>Register Form</title>
+    <title>Register Form</title>
 </head>
 <body>
 
-	<div layout:fragment="content" class="container mySpace">
-	<div class="alert alert-info" th:if="${exist}">
-	<p class="text text-center">
-	  User with this Email already Exist
-	</p>
-	</div>
-		<form th:action="@{/register}" th:object="${user}" method="post">
-			<legend>User information</legend>
-			<div class="form-group">
-				<label for="email" class="form-control-label">Email</label> <input
-					type="text" class="form-control" th:field="*{email}" id="email" />
-				<div class="text text-danger" th:if="${#fields.hasErrors('email')}"
-					th:errors="*{email}"></div>
-			</div>
-			<div class="form-group">
-				<label for="password" class="form-control-label">Password</label> <input
-					type="password" class="form-control" th:field="*{password}"
-					id="password" />
-				<div class="text text-danger"
-					th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+<div layout:fragment="content" class="container mySpace">
+    <div class="alert alert-info" th:if="${exist}">
+        <p class="text text-center">
+            User with this Email already Exist
+        </p>
+    </div>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <legend>User information</legend>
+        <div class="form-group">
+            <label for="email" class="form-control-label">Email</label> <input
+                type="text" class="form-control" th:field="*{email}" id="email"/>
+            <div class="text text-danger" th:if="${#fields.hasErrors('email')}"
+                 th:errors="*{email}"></div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-control-label">Password</label> <input
+                type="password" class="form-control" th:field="*{password}"
+                id="password"/>
+            <div class="text text-danger"
+                 th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 
-			</div>
-			<div class="form-group">
-				<label for="name" class="form-control-label">name</label> <input
-					type="text" class="form-control" th:field="*{name}" id="name" />
-				<div class="text text-danger" th:if="${#fields.hasErrors('name')}"
-					th:errors="*{name}"></div>
+        </div>
+        <div class="form-group">
+            <label for="name" class="form-control-label">name</label> <input
+                type="text" class="form-control" th:field="*{name}" id="name"/>
+            <div class="text text-danger" th:if="${#fields.hasErrors('name')}"
+                 th:errors="*{name}"></div>
 
-			</div>
+        </div>
 
-			<fieldset class="form-group">
-				<legend>Account type</legend>
-				<div class="form-check">
-					<label class="form-check-label" for="employee">
-					<input type="radio" class="form-check-input" name="roles" id="employee" value="employee" checked="checked" th:field="*{roles[0].name}" data-th-value="employee">
-					Employee
-					</label>
-				</div>
-				<div class="form-check">
-					<label class="form-check-label" for="client">
-						<input type="radio" class="form-check-input" name="roles" id="client" value="client" th:field="*{roles[0].name}" data-th-value="client">
-					Client
-					</label>
-				</div>
-			</fieldset>
+        <fieldset class="form-group">
+            <legend>Account type</legend>
+            <div class="form-check">
+                <label class="form-check-label" for="employee">
+                    <input type="radio" class="form-check-input" name="roles" id="employee" value="employee"
+                           checked="checked" th:field="*{roles[0].name}" data-th-value="employee">
+                    Employee
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label" for="client">
+                    <input type="radio" class="form-check-input" name="roles" id="client" value="client"
+                           th:field="*{roles[0].name}" data-th-value="client">
+                    Client
+                </label>
+            </div>
+        </fieldset>
 
-			<input type="submit" value="Submit" class="btn btn-primary" />
+        <input type="submit" value="Submit" class="btn btn-primary"/>
 
-		</form>
-	</div>
+    </form>
+</div>
 </body>
 </html>
