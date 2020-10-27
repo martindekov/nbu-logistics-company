@@ -28,10 +28,7 @@ public class TaskController {
     private UserService userService;
 
     @GetMapping("/addTask")
-    public String taskForm(String email, Model model, HttpSession session) {
-        // TODO: extend so tasks are assigned to employee from the customer which wants
-        //  his order to be delivered
-        session.setAttribute("email", email);
+    public String taskForm(Model model) {
         List<User> employees = userService.findEmployees();
         model.addAttribute("task", new Task());
         model.addAttribute("employees", employees);
@@ -45,10 +42,7 @@ public class TaskController {
             return "views/taskForm";
         }
 
-        SecurityContextImpl token = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
-        org.springframework.security.core.userdetails.User loggedUser =
-                (org.springframework.security.core.userdetails.User)token.getAuthentication().getPrincipal();
-        String loggedUserEmail = loggedUser.getUsername();
+        String loggedUserEmail = getEmailFromSession(session);
         User customer = userService.findOne(loggedUserEmail);
         User employee = userService.findOne(task.getEmployee().getEmail());
         taskService.addTask(task, customer, employee);
@@ -64,9 +58,12 @@ public class TaskController {
     }
 
     @GetMapping("/listCustomerTasks")
-    public String listCustomerTasks(String email, Model model, HttpSession session) {
-        // TODO: implement so the customer can see all the requested deliveries
-        return "";
+    public String listCustomerTasks(Model model, HttpSession session) {
+        String loggedUserEmail = getEmailFromSession(session);
+        User customer = userService.findOne(loggedUserEmail);
+        List<Task> employeeTasks = taskService.findCustomerTask(customer);
+        model.addAttribute("tasks", employeeTasks);
+        return "views/listCustomerTasks";
     }
 
     @PostMapping("/customerTask")
@@ -84,9 +81,12 @@ public class TaskController {
     }
 
     @GetMapping("/listEmployeeTasks")
-    public String listEmployeeTasks(String email, Model model, HttpSession session) {
-        // TODO: implement so the employee can list all requested tasks for deliveries
-        return "";
+    public String listEmployeeTasks(Model model, HttpSession session) {
+        String loggedUserEmail = getEmailFromSession(session);
+        User employee = userService.findOne(loggedUserEmail);
+        List<Task> employeeTasks = taskService.findEmployeeTask(employee);
+        model.addAttribute("tasks", employeeTasks);
+        return "views/listEmployeeTasks";
     }
 
     @PostMapping("/employeeTask")
@@ -94,5 +94,19 @@ public class TaskController {
         // TODO: implement with a form so the courier can accept or decline a task
         //  for delivery from a customer
         return "";
+    }
+
+    @GetMapping("/listAllTasks")
+    public String listAllTasks(Model model) {
+        List<Task> allTasks = taskService.findOwnerTask();
+        model.addAttribute("tasks", allTasks);
+        return "views/listAllTasks";
+    }
+
+    private String getEmailFromSession(HttpSession session) {
+        SecurityContextImpl token = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        org.springframework.security.core.userdetails.User loggedUser =
+                (org.springframework.security.core.userdetails.User) token.getAuthentication().getPrincipal();
+        return loggedUser.getUsername();
     }
 }

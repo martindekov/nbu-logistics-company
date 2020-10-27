@@ -33,7 +33,7 @@ public class TaskService {
     /**
      * Owner can see all delivery tasks
      */
-    public List<Task> findOwnerTask(User user) {
+    public List<Task> findOwnerTask() {
 
         return taskRepository.findAll();
     }

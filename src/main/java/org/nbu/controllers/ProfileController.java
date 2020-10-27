@@ -21,46 +21,10 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String showProfilePage(Model model, Principal principal) {
-        // TODO: remove once the views below are implemented
         String email = principal.getName();
         User user = userService.findOne(email);
-
-        //model.addAttribute("tasks", taskService.findUserTask(user));
+        model.addAttribute("user", user);
 
         return "views/profile";
     }
-
-    @GetMapping("/employeeProfile")
-    public String showEmployeeProfilePage(Model model, Principal principal) {
-        // TODO: implement view
-        String email = principal.getName();
-        User user = userService.findOne(email);
-
-        model.addAttribute("tasks", taskService.findEmployeeTask(user));
-
-        return "views/profile";
-    }
-
-    @GetMapping("/customerProfile")
-    public String showCustomerProfilePage(Model model, Principal principal) {
-        // TODO: implement view
-        String email = principal.getName();
-        User user = userService.findOne(email);
-
-        model.addAttribute("tasks", taskService.findCustomerTask(user));
-
-        return "views/profile";
-    }
-
-    @GetMapping("/ownerProfile")
-    public String showOwnerProfilePage(Model model, Principal principal) {
-        // TODO: implement view
-        String email = principal.getName();
-        User user = userService.findOne(email);
-
-        model.addAttribute("tasks", taskService.findOwnerTask(user));
-
-        return "views/profile";
-    }
-
 }
